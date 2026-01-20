@@ -37,9 +37,16 @@ public class PlanoDeContasController {
                 .orElse(null);
     }
 
-    @PutMapping("/alterarConta")
-    public String alterarConta(){
-        return "Sua conta foi alterada com sucesso";
+    @PutMapping("/alterarconta/{codigo}")
+    public PlanoDeContasModel alterarConta(@PathVariable int codigo){
+        PlanoDeContasModel conta = planoDeContasService.buscarContaPorCodigo(codigo)
+                .orElse(null);
+        if (conta != null){
+            planoDeContasService.atualizarConta(codigo);
+        }else {
+            throw new RuntimeException("Conta do codigo" + codigo + "não encontrada");
+        }
+        return conta;
     }
 
     @DeleteMapping("/deletarconta/{codigo}")
