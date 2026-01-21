@@ -9,21 +9,25 @@ import java.util.Optional;
 public class PlanoDeContasService {
 
     private PlanoDeContasRepository planoDeContasRepository;
+    private PlanoDeContasMapper planoDeContasMapper;
 
-    public PlanoDeContasService(PlanoDeContasRepository planoDeContasRepository) {
+    public PlanoDeContasService(PlanoDeContasRepository planoDeContasRepository, PlanoDeContasMapper planoDeContasMapper) {
         this.planoDeContasRepository = planoDeContasRepository;
+        this.planoDeContasMapper = planoDeContasMapper;
     }
 
     public List<PlanoDeContasModel> listarConta(){
         return planoDeContasRepository.findAll();
     }
 
-    public Optional<PlanoDeContasModel> buscarContaPorCodigo(int codigo){
+    public Optional<PlanoDeContasDTO> buscarContaPorCodigo(int codigo){
         return planoDeContasRepository.findByCodigo(codigo);
     }
 
-    public PlanoDeContasModel criarConta(PlanoDeContasModel contasContabil){
-        return planoDeContasRepository.save(contasContabil);
+    public PlanoDeContasDTO criarConta(PlanoDeContasDTO planoDeContasDTO){
+        PlanoDeContasModel conta = planoDeContasMapper.map(planoDeContasDTO);
+        conta = planoDeContasRepository.save(conta);
+        return planoDeContasMapper.map(conta);
     }
 
     public void deletarPorCodigo(int codigo) {

@@ -6,5 +6,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PlanoDeContasRepository extends JpaRepository<PlanoDeContasModel, Long> {
-    Optional<PlanoDeContasModel> findByCodigo(int codigo);
+    Optional<PlanoDeContasDTO> findByCodigo(int codigo);
 }

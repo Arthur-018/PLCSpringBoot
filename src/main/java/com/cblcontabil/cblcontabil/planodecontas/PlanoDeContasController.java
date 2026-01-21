@@ -22,8 +22,8 @@ public class PlanoDeContasController {
     }
 
     @PostMapping("/criar")
-    public PlanoDeContasModel criarContas(@RequestBody PlanoDeContasModel planoDeContasModel){
-        return planoDeContasService.criarConta(planoDeContasModel);
+    public PlanoDeContasDTO criarContas(@RequestBody PlanoDeContasDTO planoDeContasDTO){
+        return planoDeContasService.criarConta(planoDeContasDTO);
     }
 
     @GetMapping("/listar")
